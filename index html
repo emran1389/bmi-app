@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BMI Calculator</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      direction: rtl;
+      background: #f4f4f4;
+      padding: 20px;
+      text-align: center;
+    }
+    .card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 16px;
+      max-width: 400px;
+      margin: 0 auto;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    input {
+      width: 90%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #aaa;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    button {
+      width: 95%;
+      padding: 12px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      font-size: 18px;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+    button:hover { background: #43a047; }
+    #result { margin-top: 20px; font-size: 20px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>محاسبه‌گر BMI</h2>
+    <input id="weight" type="number" placeholder="وزن (کیلوگرم)" />
+    <input id="height" type="number" placeholder="قد (سانتی‌متر)" />
+    <button onclick="calcBMI()">محاسبه</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function calcBMI() {
+      const w = parseFloat(document.getElementById('weight').value);
+      const h = parseFloat(document.getElementById('height').value) / 100;
+      if (!w || !h) {
+        document.getElementById('result').innerText = 'لطفا اطلاعات را کامل وارد کنید.';
+        return;
+      }
+      const bmi = (w / (h * h)).toFixed(1);
+      let status = '';
+      if (bmi < 18.5) status = 'کمبود وزن';
+      else if (bmi < 25) status = 'وزن سالم';
+      else if (bmi < 30) status = 'اضافه وزن';
+      else status = 'چاقی';
+
+      document.getElementById('result').innerHTML = `BMI شما: <b>${bmi}</b><br>${status}`;
+    }
+  </script>
+</body>
+</html>
